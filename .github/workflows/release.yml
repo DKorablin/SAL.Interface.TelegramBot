@@ -3,15 +3,10 @@
 # Workflow Steps:
 # 1. Test: Runs all unit tests for the solution.
 # 2. Version: Automatically increments the version number based on commit history and creates a new Git tag.
-# 3. Build, Package, and Release: This is a multi-stage job that performs the following:
+# 3. Build and Package: This is a multi-stage job that performs the following:
 #    - Builds the multi-targeted project for all target frameworks.
 #    - Signs the output assemblies.
 #    - Creates and publishes a NuGet package to GitHub Packages.
-#    - Organizes build artifacts into a 'Plugin' subfolder structure.
-#    - Calls an external PowerShell script to download required release assets from the 'Flatbed.Dialog.Lite' repository,
-#      matching only the frameworks that were just built.
-#    - Organize build artifacts, injects dependencies, and creates the final zipped release archives for each target framework.
-#    - Publishes a single, comprehensive GitHub Release with all generated .zip files as artifacts.
 # 4. Cleanup: If any part of the build or release process fails, a final job runs to remove the Git tag that was created.
 
 name: Build, Release
@@ -122,30 +117,6 @@ jobs:
         /p:SymbolPackageFormat=snupkg
     - name: Deploying package to GitHub
       run: dotnet nuget push ${{github.workspace}}\nupkg\ --skip-duplicate --api-key ${{secrets.GITHUB_TOKEN}} --source https://nuget.pkg.github.com/DKorablin/index.json
-    # This step query the latest version of executable repository to store files inside current release
-    - name: Get latest Flatbed.Dialog.Lite release version
-      id: get_flatbed_release
-      run: |
-        .\.github\scripts\Download-ReleaseAssets.ps1 `
-            -GitHubToken ${{secrets.DEPLOYMENT_TOKEN}} `
-            -BinDirectory "${{env.ArtifactsDir}}"
-    # After that we need to extract all files related to executable into bin folder for specific build
-    - name: Extract Dependencies and Zip Release Artifacts
-      run: |
-        .\.github\scripts\Files-OrganizeRelease.ps1 `
-          -BinDirectory "${{env.ArtifactsDir}}" `
-          -DependencyVersion "${{steps.get_flatbed_release.outputs.latest_version}}" `
-          -SolutionName "${{env.SolutionName}}" `
-          -ReleaseVersion "${{needs.version.outputs.new_version}}"
-    - name: Publish GitHub Release
-      uses: ncipollo/release-action@v1
-      with:
-        artifacts: ${{env.ArtifactsDir}}\*.zip
-        tag: ${{needs.version.outputs.new_tag}}
-        name: Auto ${{needs.version.outputs.new_tag}}
-        body: ${{needs.version.outputs.changelog}}
-        artifactErrorsFailBuild: true
-        generateReleaseNotes: true
 
   failure_cleanup:
     name: Cleanup Tag On Failure
