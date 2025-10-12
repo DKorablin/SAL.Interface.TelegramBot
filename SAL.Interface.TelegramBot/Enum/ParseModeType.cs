@@ -1,13 +1,13 @@
 ﻿namespace SAL.Interface.TelegramBot
 {
-	/// <summary>Форматирование используемое при парсинге сообщения пользователю в клиенте</summary>
+	/// <summary>Formatting used when parsing a message to a user in the client</summary>
 	public enum ParseModeType
 	{
-		/// <summary>Парсинг по умолчанию</summary>
+		/// <summary>Parsing by default</summary>
 		Default,
-		/// <summary>Форматирование по белому списку</summary>
+		/// <summary>Whitelist formatting</summary>
 		Markdown,
-		/// <summary>Форматирование HTML вёрстки</summary>
+		/// <summary>HTML layout formatting</summary>
 		Html,
 	}
 }

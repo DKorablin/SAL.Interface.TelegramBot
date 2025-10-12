@@ -2,7 +2,7 @@
 
 namespace SAL.Interface.TelegramBot.Request
 {
-	/// <summary>Данные о пользователе, который пользуется чатом</summary>
+	/// <summary>Data about the user who uses the chat</summary>
 	public class User
 	{
 		/// <summary>User's user identifier in Telegram</summary>

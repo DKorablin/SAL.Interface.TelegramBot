@@ -2,13 +2,13 @@
 
 namespace SAL.Interface.TelegramBot.Request
 {
-	/// <summary>Базовая информация о передаваемом клиентов файле</summary>
+	/// <summary>Basic information about the client file being transferred</summary>
 	public class FileBase
 	{
-		/// <summary>Идентификатор файла для загрузки</summary>
+		/// <summary>File ID for upload</summary>
 		public String FileId { get; set; }
 
-		/// <summary>Размер файла</summary>
+		/// <summary>File size</summary>
 		public Int32 FileSize { get; set; }
 
 		/// <summary>Mime-Type</summary>

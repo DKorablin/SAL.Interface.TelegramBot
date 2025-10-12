@@ -2,13 +2,13 @@
 
 namespace SAL.Interface.TelegramBot.Request
 {
-	/// <summary>Клиент передаёт аудио файл</summary>
+	/// <summary>Client sends an audio file</summary>
 	public class Audio : FileBase
 	{
-		/// <summary>Название аудиофайла как указал отправитель или как написано в тегах</summary>
+		/// <summary>Title of the audio file as specified by the sender or contained in tags</summary>
 		public String Title { get; set; }
 
-		/// <summary>Длительность аудиофайла</summary>
+		/// <summary>Duration of the audio file</summary>
 		public Int32 Duration { get; set; }
 	}
 }

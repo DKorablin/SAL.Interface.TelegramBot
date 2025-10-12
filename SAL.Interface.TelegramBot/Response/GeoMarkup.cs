@@ -2,13 +2,13 @@
 
 namespace SAL.Interface.TelegramBot.Response
 {
-	/// <summary>Передача координат на карте</summary>
+	/// <summary>Transferring coordinates on the map</summary>
 	public class GeoMarkup : IReplyMarkup
 	{
-		/// <summary>Долгота</summary>
+		/// <summary>Latitude</summary>
 		public Single Latitude { get; set; }
 
-		/// <summary>Широта</summary>
+		/// <summary>Longitude</summary>
 		public Single Longitude { get; set; }
 	}
 }

@@ -4,12 +4,12 @@ using SAL.Interface.TelegramBot.Response;
 
 namespace SAL.Interface.TelegramBot
 {
-	/// <summary>Хендлер обработку нетипизированных запросов от клиента через Telegram</summary>
+	/// <summary>Handler for processing untyped client requests via Telegram</summary>
 	public interface IChatProcessor : IChatMarker
 	{
-		/// <summary>Ответить на сообщение клиента</summary>
-		/// <param name="message">Сообщение от клеинта, на которое подготовить ответ</param>
-		/// <returns>Ответ подготовленный плагином или null, если ответить по запросу - не вышло</returns>
+		/// <summary>Reply to the client's message</summary>
+		/// <param name="message">Message from the client to prepare a response</param>
+		/// <returns>Response prepared by the plugin or null if responding failed</returns>
 		IEnumerable<Reply> ProcessMessage(Message message);
 	}
 }

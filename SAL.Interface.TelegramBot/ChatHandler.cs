@@ -7,44 +7,44 @@ using SAL.Interface.TelegramBot.Response;
 
 namespace SAL.Interface.TelegramBot
 {
-	/// <summary>Абстрактный класс хендлера чата для наследования инстансов</summary>
+	/// <summary>Abstract chat handler class for inheriting instances</summary>
 	public abstract class ChatHandler : IChatProcessor, IChatUsage
 	{
-		/// <summary>Обрабатываемое сообщение</summary>
+		/// <summary>Message being processed</summary>
 		public Message Message { get; set; }
 
-		/// <summary>Создание экземпляра хендлера для глобального кеширования</summary>
-		public ChatHandler()
+		/// <summary>Create a handler instance for global caching</summary>
+		protected ChatHandler()
 		{
 
 		}
 
-		/// <summary>Создание экземпляра хендлера для каждого запроса пользователя</summary>
-		/// <param name="message">Сообщение от пользователя</param>
-		public ChatHandler(Message message)
+		/// <summary>Create a handler instance for each user request</summary>
+		/// <param name="message">Message from the user</param>
+		protected ChatHandler(Message message)
 			=> this.Message = message;
 
-		/// <summary>Создание экземпляра хендлера для кеширования на уровень чата</summary>
-		/// <param name="chat">Данные чата для которого закешировать хендлер</param>
-		public ChatHandler(Chat chat)
+		/// <summary>Create a handler instance for caching at the chat level</summary>
+		/// <param name="chat">Chat data for which to cache the handler</param>
+		protected ChatHandler(Chat chat)
 		{
 		}
 
-		/// <summary>Создание экземпляра хендлера для кеширования на уровень пользователя</summary>
-		/// <param name="user">Данные пользователя для которого закешировать хендлер</param>
-		public ChatHandler(User user)
+		/// <summary>Create a handler instance for caching at the user level</summary>
+		/// <param name="user">User data for which to cache the handler</param>
+		protected ChatHandler(User user)
 		{
 		}
 
-		/// <summary>Обработка сообщением плагином, без привязки к методу</summary>
-		/// <returns>По умолчанию результат пустой</returns>
+		/// <summary>Processing the message by the plugin without binding to a method</summary>
+		/// <returns>By default the result is empty</returns>
 		public virtual IEnumerable<Reply> ProcessMessage()
 		{
 			yield break;
 		}
 
-		/// <summary>Получение информации об использовании плагинов, путём запроса через рефлексию всех методов</summary>
-		/// <returns>Ответ с информацией об использовании плагина через тегеграм</returns>
+		/// <summary>Obtaining information about plugin usage by querying all methods via reflection</summary>
+		/// <returns>Response with information about plugin usage via Telegram</returns>
 		public virtual IEnumerable<UsageReply> GetUsage()
 		{
 			MethodInfo[] methods = this.GetType().GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
@@ -57,13 +57,9 @@ namespace SAL.Interface.TelegramBot
 		}
 
 		IEnumerable<Reply> IChatProcessor.ProcessMessage(Message message)
-		{
-			return this.ProcessMessage();
-		}
+			=> this.ProcessMessage();
 
 		IEnumerable<UsageReply> IChatUsage.GetUsage(Message message)
-		{
-			return this.GetUsage();
-		}
+			=> this.GetUsage();
 	}
 }

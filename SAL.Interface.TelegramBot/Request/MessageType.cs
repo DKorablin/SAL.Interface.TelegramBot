@@ -7,15 +7,15 @@
 		UnknownMessage = 0,
 		/// <summary>The Telegram.Bot.Types.Message contains text</summary>
 		TextMessage = 1,
-		/// <summary>Клиент передал голосовое сообщение</summary>
+		/// <summary>The client sent a voice message</summary>
 		Voice = 5,
-		/// <summary>Клиент передал документ или аудиофайл</summary>
+		/// <summary>The client has submitted a document or audio file</summary>
 		Document = 6,
-		/// <summary>Клиент расшарил контакт</summary>
+		/// <summary>The client shared the contact</summary>
 		Contact = 9,
-		/// <summary>Попытка обернуть CallbackQuery в сообщение</summary>
+		/// <summary>Trying to wrap a CallbackQuery in a message</summary>
 		CallbackQuery = 12,
-		/// <summary>Успешное присоединение клиента сайта к Телеграму</summary>
+		/// <summary>Successfully connecting the website client to Telegram</summary>
 		WebsiteConnected = 15,
 	}
 }

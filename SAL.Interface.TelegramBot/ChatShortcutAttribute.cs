@@ -2,17 +2,17 @@
 
 namespace SAL.Interface.TelegramBot
 {
-	/// <summary>Описание метода, вызываемого по комманде</summary>
+	/// <summary>Description of the method invoked by a command</summary>
 	[AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
 	public class ChatShortcutAttribute : Attribute
 	{
-		/// <summary>Ключ по которому можно вызвать метод</summary>
+		/// <summary>Key by which the method can be called</summary>
 		public String Key { get; set; }
 
-		/// <summary>Ответное сообщение по которому можно вызвать метод</summary>
+		/// <summary>Reply message by which the method can be called</summary>
 		public String ReplyToKey { get; set; }
 
-		/// <summary>Описание результата вызова метода по ключу</summary>
+		/// <summary>Description of the result of invoking the method by the key</summary>
 		public String Description { get; set; }
 	}
 }

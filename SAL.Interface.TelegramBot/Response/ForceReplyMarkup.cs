@@ -2,7 +2,7 @@
 
 namespace SAL.Interface.TelegramBot.Response
 {
-	/// <summary>Форсированный ответ. Удобно использовать для Wizard'ов</summary>
+	/// <summary>Forced response. Convenient for Wizards.</summary>
 	public class ForceReplyMarkup : IReplyMarkup
 	{
 	}

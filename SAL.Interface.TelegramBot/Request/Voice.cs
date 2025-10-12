@@ -2,7 +2,7 @@
 
 namespace SAL.Interface.TelegramBot.Request
 {
-	/// <summary>Голосовое сообщение от пользователя</summary>
+	/// <summary>Voice message from the user</summary>
 	public class Voice : FileBase
 	{
 		/// <summary>Duration of the audio in seconds as defined by sender</summary>

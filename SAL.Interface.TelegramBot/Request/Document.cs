@@ -2,10 +2,10 @@
 
 namespace SAL.Interface.TelegramBot.Request
 {
-	/// <summary>Клиент передаёт файл</summary>
+	/// <summary>The client transfers a file</summary>
 	public class Document : FileBase
 	{
-		/// <summary>Наименование файла</summary>
+		/// <summary>File name</summary>
 		public String FileName { get; set; }
 	}
 }

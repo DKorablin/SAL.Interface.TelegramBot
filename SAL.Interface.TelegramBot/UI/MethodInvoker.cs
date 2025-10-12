@@ -7,100 +7,100 @@ using SAL.Interface.TelegramBot.Response;
 
 namespace SAL.Interface.TelegramBot.UI
 {
-	/// <summary>Класс создания callback'ов на методы из телеги</summary>
-	public class MethodInvoker
+	/// <summary>Class for creating callbacks to methods from a cart</summary>
+	public static class MethodInvoker
 	{
-		/// <summary>Создать callback на метод с одним аргументом и потоком ответов</summary>
-		/// <typeparam name="T">Тип аргумента</typeparam>
-		/// <param name="title">Заголовок на кнопке</param>
-		/// <param name="callback">Рефлексия на метод</param>
-		/// <param name="argument">Один аргумент принимаемый в метод</param>
-		/// <returns>Кнопка для рисования в ответе</returns>
+		/// <summary>Create a callback to a method with one argument and a response stream</summary>
+		/// <typeparam name="T">Argument type</typeparam>
+		/// <param name="title">Button label</param>
+		/// <param name="callback">Method reflection</param>
+		/// <param name="argument">Single argument accepted by the method</param>
+		/// <returns>Button to render in the response</returns>
 		public static InlineButton CreateInlineButton<T>(String title, Func<T, IEnumerable<Reply>> callback, T argument)
 			=> CreateInlineButton(title, callback.Method, argument);
 
-		/// <summary>Создать callback на метод с двумя аргументами и потоком ответов</summary>
-		/// <typeparam name="T1">Тип первого аргумента</typeparam>
-		/// <typeparam name="T2">Тип второго аргумента</typeparam>
-		/// <param name="title">Заголовок на кнопке</param>
-		/// <param name="callback">Рефлексия на метод</param>
-		/// <param name="argument1">Первый аргумент</param>
-		/// <param name="argument2">Второй аргумент</param>
-		/// <returns>Кнопка для рисования в ответе</returns>
+		/// <summary>Create a callback to a method with two arguments and a stream of replies</summary>
+		/// <typeparam name="T1">Type of the first argument</typeparam>
+		/// <typeparam name="T2">Type of the second argument</typeparam>
+		/// <param name="title">Button label</param>
+		/// <param name="callback">Method reflection</param>
+		/// <param name="argument1">First argument</param>
+		/// <param name="argument2">Second argument</param>
+		/// <returns>Button to render in the response</returns>
 		public static InlineButton CreateInlineButton<T1,T2>(String title,Func<T1,T2,IEnumerable<Reply>> callback,T1 argument1,T2 argument2)
 			=> CreateInlineButton(title, callback.Method, argument1, argument2);
 
-		/// <summary>Создать callback на метод с трёмя аргументами и потоком ответов</summary>
-		/// <typeparam name="T1">Тип первого аргумента</typeparam>
-		/// <typeparam name="T2">Тип второго аргумента</typeparam>
-		/// <typeparam name="T3">Тип третьего аргумента</typeparam>
-		/// <param name="title">Заголовок на кнопке</param>
-		/// <param name="callback">Рефлексия на метод</param>
-		/// <param name="argument1">Первый аргумент</param>
-		/// <param name="argument2">Второй аргумент</param>
-		/// <param name="argument3">Третий аргумент</param>
-		/// <returns>Кнопка для рисования в ответе</returns>
+		/// <summary>Create a callback to a method with three arguments and a stream of replies</summary>
+		/// <typeparam name="T1">Type of the first argument</typeparam>
+		/// <typeparam name="T2">Type of the second argument</typeparam>
+		/// <typeparam name="T3">Type of the third argument</typeparam>
+		/// <param name="title">Button label</param>
+		/// <param name="callback">Method reflection</param>
+		/// <param name="argument1">First argument</param>
+		/// <param name="argument2">Second argument</param>
+		/// <param name="argument3">Third argument</param>
+		/// <returns>Button to render in the response</returns>
 		public static InlineButton CreateInlineButton<T1, T2, T3>(String title, Func<T1, T2, T3, IEnumerable<Reply>> callback, T1 argument1, T2 argument2, T3 argument3)
 			=> CreateInlineButton(title, callback.Method, argument1, argument2, argument3);
 
-		/// <summary>Создать callback на метод с четырьмя аргументами и потоком ответов</summary>
-		/// <typeparam name="T1">Тип первого аргумента</typeparam>
-		/// <typeparam name="T2">Тип второго аргумента</typeparam>
-		/// <typeparam name="T3">Тип третьего аргумента</typeparam>
-		/// <typeparam name="T4">Тип четвёртого аргумента</typeparam>
-		/// <param name="title">Заголовок на кнопке</param>
-		/// <param name="callback">Рефлексия на метод</param>
-		/// <param name="argument1">Первый аргумент</param>
-		/// <param name="argument2">Второй аргумент</param>
-		/// <param name="argument3">Третий аргумент</param>
-		/// <param name="argument4">Четвёртый аргумент</param>
-		/// <returns>Кнопка для рисования в ответе</returns>
+		/// <summary>Create a callback to a method with four arguments and a stream of replies</summary>
+		/// <typeparam name="T1">Type of the first argument</typeparam>
+		/// <typeparam name="T2">Type of the second argument</typeparam>
+		/// <typeparam name="T3">Type of the third argument</typeparam>
+		/// <typeparam name="T4">Type of the fourth argument</typeparam>
+		/// <param name="title">Button label</param>
+		/// <param name="callback">Method reflection</param>
+		/// <param name="argument1">First argument</param>
+		/// <param name="argument2">Second argument</param>
+		/// <param name="argument3">Third argument</param>
+		/// <param name="argument4">Fourth argument</param>
+		/// <returns>Button to render in the response</returns>
 		public static InlineButton CreateInlineButton<T1, T2, T3, T4>(String title, Func<T1, T2, T3, T4, IEnumerable<Reply>> callback, T1 argument1, T2 argument2, T3 argument3, T4 argument4)
 			=> CreateInlineButton(title, callback.Method, argument1, argument2, argument3, argument4);
 
-		/// <summary>Получить список всех поддерживаемых методов в вефлексии</summary>
-		/// <param name="instanceType">Рефлексия класса, где подразумевается поиск поддерживаемых методов</param>
-		/// <returns>Массив поддерживаемых методов</returns>
+		/// <summary>Create a button specifying text and method reflection for callback</summary>
+		/// <param name="title">Text on the button</param>
+		/// <param name="method">Method reflection</param>
+		/// <param name="values">Arguments passed to the method</param>
+		/// <returns>Button for the response</returns>
+		public static InlineButton CreateInlineButton(String title, MethodInfo method, params Object[] values)
+			=> new InlineButton(title == null ? "null" : title, CreateReference(method, values));
+
+		/// <summary>Create a button with an arbitrary command to be executed by an unknown method (for example, in another plugin)</summary>
+		/// <param name="title">Text on the button</param>
+		/// <param name="callbackMethod">Callback command text</param>
+		/// <param name="values">Arguments passed to the method</param>
+		/// <returns>Button for the response</returns>
+		public static InlineButton CreateInlineButton(String title, String callbackMethod, params Object[] values)
+			=> new InlineButton(title == null ? "null" : title, callbackMethod + "_" + String.Join("_", FormatParameters(values)));
+
+		/// <summary>Get a list of all supported methods via reflection</summary>
+		/// <param name="instanceType">Class type where supported methods are searched</param>
+		/// <returns>Array of supported methods</returns>
 		public static MethodInfo[] GetSupportedMethods(Type instanceType)
 			=> instanceType.GetMethods(BindingFlags.Instance | BindingFlags.Public)
 				.Where(p => p.ReturnType == typeof(IEnumerable<Reply>) || p.ReturnType == typeof(Reply[]) || p.ReturnType == typeof(Reply))
 				.ToArray();
 
-		/// <summary>Получить уникальный ключ метода исходя из рефлексии</summary>
-		/// <param name="method">Рефлексия метода</param>
-		/// <returns>Уникальный ключ метода</returns>
+		/// <summary>Get a unique key of the method based on reflection</summary>
+		/// <param name="method">Method reflection</param>
+		/// <returns>Unique method key</returns>
 		public static Int32 GetMethodKey(MethodInfo method)
 		{
 			String methodKey = method.DeclaringType.FullName + '.' + method.Name;
 			return methodKey.GetHashCode();
 		}
 
-		/// <summary>Создание кнопки с указанием текста и рефлексией метода для обратного вызова</summary>
-		/// <param name="title">Текст на кнопке</param>
-		/// <param name="method">Рефлексия метода</param>
-		/// <param name="values">Аргументы, передаваемые в метод</param>
-		/// <returns>Кнопка для ответа</returns>
-		public static InlineButton CreateInlineButton(String title, MethodInfo method, params Object[] values)
-			=> new InlineButton(title == null ? "null" : title, CreateReference(method, values));
-
-		/// <summary>Создание кнопки с указанием произвольной коммандой для выполнения неизвестным методом (к примеру, в другом плагине)</summary>
-		/// <param name="title">Текст на кнопке</param>
-		/// <param name="callbackMethod">Текстовая комманда обратного вызова</param>
-		/// <param name="values">Аргументы, передаваемые в метод</param>
-		/// <returns>Кнопка для ответа</returns>
-		public static InlineButton CreateInlineButton(String title,String callbackMethod, params Object[] values)
-			=> new InlineButton(title == null ? "null" : title, callbackMethod + "_" + String.Join("_", FormatParameters(values)));
-
-		/// <summary>Создать полноценную команду для вызова конкретного метода</summary>
-		/// <param name="method">Рефлексия метода</param>
-		/// <param name="values">Значения передаваемые в метод при нажатии на кнопку</param>
-		/// <returns>Комманда для пердачи в телеграм, по которой обратно будет вызван метода и переданы аргументы</returns>
+		/// <summary>Create a full command to invoke a specific method</summary>
+		/// <param name="method">Method reflection</param>
+		/// <param name="values">Values passed to the method when the button is pressed</param>
+		/// <returns>Command to send to Telegram by which the method will be invoked and arguments passed back</returns>
 		public static String CreateReference(MethodInfo method, params Object[] values)
 			=> "/" + GetMethodKey(method) + ":" + String.Join("&", FormatParameters(values));
 
-		/// <summary>Преобразвать параметры в строковое представление</summary>
-		/// <param name="values">Аргументы метода</param>
-		/// <returns>Поток отформатированных объектов</returns>
+		/// <summary>Convert parameters to string representation</summary>
+		/// <param name="values">Method arguments</param>
+		/// <returns>Sequence of formatted objects</returns>
 		private static IEnumerable<Object> FormatParameters(Object[] values)
 		{
 			foreach(Object value in values)

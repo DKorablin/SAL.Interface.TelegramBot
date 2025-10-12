@@ -32,7 +32,7 @@ namespace SAL.Interface.TelegramBot
 			{
 				value = converter.ConvertFromString(text);
 
-				//value = Convert.ChangeType(text, parameter.ParameterType);
+				// value = Convert.ChangeType(text, parameter.ParameterType)
 				result = true;
 			} catch(IndexOutOfRangeException)
 			{

@@ -6,8 +6,10 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{29EFF129-D181-471B-939B-05374FAEB871}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+		Directory.Packages.props = Directory.Packages.props
 		README.md = README.md
-		SAL.Interface.TelegramBot.dll.nuspec = SAL.Interface.TelegramBot.dll.nuspec
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{06D963D4-9A0B-4B2B-A3C3-B1A534140FD0}"
@@ -17,7 +19,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{
 		.github\workflows\test.yml = .github\workflows\test.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAL.Interface.TelegramBot35", "SAL.Interface.TelegramBot\SAL.Interface.TelegramBot35.csproj", "{7FA731BC-62B8-4EF4-9D47-74B641EA7E91}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		.github\scripts\Download-ReleaseAssets.ps1 = .github\scripts\Download-ReleaseAssets.ps1
+		.github\scripts\Files-OrganizeRelease.ps1 = .github\scripts\Files-OrganizeRelease.ps1
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAL.Interface.TelegramBot", "SAL.Interface.TelegramBot\SAL.Interface.TelegramBot.csproj", "{9655FD25-B0DC-8B24-E9D0-F766CBBD8B91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,18 +34,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7FA731BC-62B8-4EF4-9D47-74B641EA7E91}.Debug (Dialog)|Any CPU.ActiveCfg = Debug (Dialog)|Any CPU
-		{7FA731BC-62B8-4EF4-9D47-74B641EA7E91}.Debug (Dialog)|Any CPU.Build.0 = Debug (Dialog)|Any CPU
-		{7FA731BC-62B8-4EF4-9D47-74B641EA7E91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7FA731BC-62B8-4EF4-9D47-74B641EA7E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7FA731BC-62B8-4EF4-9D47-74B641EA7E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7FA731BC-62B8-4EF4-9D47-74B641EA7E91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9655FD25-B0DC-8B24-E9D0-F766CBBD8B91}.Debug (Dialog)|Any CPU.ActiveCfg = Debug|Any CPU
+		{9655FD25-B0DC-8B24-E9D0-F766CBBD8B91}.Debug (Dialog)|Any CPU.Build.0 = Debug|Any CPU
+		{9655FD25-B0DC-8B24-E9D0-F766CBBD8B91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9655FD25-B0DC-8B24-E9D0-F766CBBD8B91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9655FD25-B0DC-8B24-E9D0-F766CBBD8B91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9655FD25-B0DC-8B24-E9D0-F766CBBD8B91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{06D963D4-9A0B-4B2B-A3C3-B1A534140FD0} = {29EFF129-D181-471B-939B-05374FAEB871}
+		{02EA681E-C7D8-13C7-8484-4AC65E1B71E8} = {29EFF129-D181-471B-939B-05374FAEB871}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BA4632CB-F2AC-4E96-82A0-59488827569D}

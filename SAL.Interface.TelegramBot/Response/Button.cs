@@ -2,25 +2,25 @@
 
 namespace SAL.Interface.TelegramBot.Response
 {
-	/// <summary>Фиксированные кнопки с фиксированными действиями на клавиатуре</summary>
+	/// <summary>Fixed buttons with fixed actions on the keyboard</summary>
 	public class Button
 	{
-		/// <summary>Текст на кнопке</summary>
+		/// <summary>Text on the button</summary>
 		public String Text { get; private set; }
 
-		/// <summary>Запрос контактов у клиента</summary>
+		/// <summary>Requesting contact information from the client</summary>
 		public Boolean RequestContact { get; set; }
 
-		/// <summary>Запрос местоположения у клиента</summary>
+		/// <summary>Requesting location from the client</summary>
 		public Boolean RequestLocation { get; set; }
 
-		/// <summary>Создание экземпляра класса с фиксированной кнопкой и фиксированным действием</summary>
-		/// <param name="text">Текст на кнопке</param>
-		/// <exception cref="ArgumentNullException">Текс на кнопке - обязателен</exception>
+		/// <summary>Creating an instance of a class with a fixed button and a fixed action</summary>
+		/// <param name="text">Text on the button</param>
+		/// <exception cref="ArgumentNullException">Button text is required.</exception>
 		public Button(String text)
 		{
 			if(String.IsNullOrWhiteSpace(text))
-				throw new ArgumentNullException("text");
+				throw new ArgumentNullException(nameof(text));
 
 			this.Text = text;
 		}

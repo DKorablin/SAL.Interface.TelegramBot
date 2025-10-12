@@ -2,26 +2,26 @@
 
 namespace SAL.Interface.TelegramBot.Response
 {
-	/// <summary>Ответ на запрос клиента</summary>
+	/// <summary>Reply to a customer request</summary>
 	public class Reply
 	{
-		/// <summary>Пустой ответ</summary>
-		/// <remarks>Отправляется, в случае если запрос клиента обработан, но на него нет ответа</remarks>
+		/// <summary>Empty answer</summary>
+		/// <remarks>Sent if the client's request has been processed but there is no response.</remarks>
 		public static readonly Reply Empty = new Reply();
 
-		/// <summary>Заголовок сообщения</summary>
+		/// <summary>Message title</summary>
 		public virtual String Title { get; set; }
 
-		/// <summary>Форматирование используемое при ответе</summary>
+		/// <summary>Formatting used in response</summary>
 		public ParseModeType ParseMode{ get; set; }
 
-		/// <summary>Идентификатор сообщения на которое производится ответ</summary>
+		/// <summary>The identifier of the message to which the response is being made</summary>
 		public Int32 ReplyToMessageId { get; set; }
 
-		/// <summary>Выставляется при необходимости отредактировать сообщение</summary>
+		/// <summary>It is displayed when it is necessary to edit the message.</summary>
 		public Int32? EditMessageId { get; set; }
 
-		/// <summary>Дополнительная разметка</summary>
+		/// <summary>Additional markup</summary>
 		public IReplyMarkup Markup { get; set; }
 	}
 }

@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace SAL.Interface.TelegramBot.Response
+﻿namespace SAL.Interface.TelegramBot.Response
 {
-	/// <summary>Абстрактный интерфейс ответа с дополнительными фичами</summary>
+	/// <summary>Abstract response interface with additional features</summary>
 	public interface IReplyMarkup
 	{
 	}

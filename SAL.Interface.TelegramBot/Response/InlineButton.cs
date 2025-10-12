@@ -2,7 +2,7 @@
 
 namespace SAL.Interface.TelegramBot.Response
 {
-	/// <summary>Кнопка, которая рисуется на клавиатуре</summary>
+	/// <summary>A button that is drawn on the keyboard</summary>
 	public class InlineButton
 	{
 		/// <summary>Label text on the button</summary>
@@ -14,11 +14,11 @@ namespace SAL.Interface.TelegramBot.Response
 		/// <summary>Optional. HTTP url to be opened when button is pressed</summary>
 		public String Url { get; set; }
 
-		/// <summary>Создание экземпляра класса, который рисует кнопку для клиента</summary>
-		/// <param name="title">Заголовок кнопки</param>
-		/// <param name="callbackData">Данные обратного вызова</param>
-		/// <exception cref="ArgumentNullException">Заголовок кнопки обязательный</exception>
-		/// <exception cref="ArgumentNullException">Данные обратного вызова обязательны</exception>
+		/// <summary>Create an instance of a class that draws a button for the client</summary>
+		/// <param name="title">Button title</param>
+		/// <param name="callbackData">Callback data</param>
+		/// <exception cref="ArgumentNullException">Button title is required</exception>
+		/// <exception cref="ArgumentNullException">Callback data is required</exception>
 		public InlineButton(String title, String callbackData)
 		{
 			if(String.IsNullOrWhiteSpace(title))

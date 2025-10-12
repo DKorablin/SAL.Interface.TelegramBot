@@ -5,38 +5,38 @@ using SAL.Interface.TelegramBot.Response;
 
 namespace SAL.Interface.TelegramBot.UI
 {
-	/// <summary>Элемент управления, который позволяет генерить визарды</summary>
+	/// <summary>Control element that allows generating wizards</summary>
 	public class WizardCtrl
 	{
-		/// <summary>Ряд, описывающий шаг в визарде</summary>
+		/// <summary>Row describing a step in the wizard</summary>
 		public class StepRow
 		{
-			/// <summary>Текст, описывающий требуемые данные от клиента</summary>
+			/// <summary>Text describing the required data from the client</summary>
 			private String Text { get; set; }
 
-			/// <summary>Заголовок, отображаемый пользователю</summary>
+			/// <summary>Title displayed to the user</summary>
 			internal String Title { get; private set; }
 
-			/// <summary>Тип требуемого значения</summary>
+			/// <summary>Type of the required value</summary>
 			public TypeCode ValueType { get; set; }
 
-			/// <summary>Полученное значение от пользователя</summary>
+			/// <summary>Value received from the user</summary>
 			public virtual Object Value { get; set; }
 
-			/// <summary>Значение по умолчанию, если клиент передал пустое значение</summary>
+			/// <summary>Default value if the client provided an empty value</summary>
 			public virtual Object DefaultValue{ get; set; }
 
-			/// <summary>Создание ряда шага для визарда</summary>
-			/// <param name="text">Текст для отображения клиенту</param>
-			/// <param name="type">Тип требуемого значения</param>
+			/// <summary>Create a step row for the wizard</summary>
+			/// <param name="text">Text to display to the client</param>
+			/// <param name="type">Type of the required value</param>
 			public StepRow(String text, Type type)
 				: this(text, StepRow.GetTypeCode(type))
 			{
 			}
 
-			/// <summary>Создание ряда шага для визарда</summary>
-			/// <param name="text">Текст для отображения клиенту</param>
-			/// <param name="valueType">Тип требуемого значения</param>
+			/// <summary>Create a step row for the wizard</summary>
+			/// <param name="text">Text to display to the client</param>
+			/// <param name="valueType">Type of the required value</param>
 			public StepRow(String text,TypeCode valueType)
 			{
 				if(String.IsNullOrWhiteSpace(text))
@@ -57,9 +57,9 @@ namespace SAL.Interface.TelegramBot.UI
 					return Type.GetTypeCode(type);
 			}
 
-			/// <summary>Внутренний класс установки фиксированного заголовка</summary>
-			/// <param name="index">Индекс шага в массиве шагов</param>
-			/// <param name="totalRows">Общее количество рядов</param>
+			/// <summary>Internal method to set a fixed title</summary>
+			/// <param name="index">Index of the step in the steps array</param>
+			/// <param name="totalRows">Total number of rows</param>
 			internal void SetTitle(Int32 index, Int32 totalRows)
 				=> this.Title = totalRows == 1
 					? this.Text
@@ -73,34 +73,29 @@ namespace SAL.Interface.TelegramBot.UI
 			}
 		}
 
-		private readonly Object _instance;
-
 		private StepRow[] _steps;
 
-		/// <summary>Сообщение, с которого начинается работа визарда</summary>
+	/// <summary>Message from which the wizard starts working</summary>
 		public String TriggerMessage { get; private set; }
 
-		/// <summary>Создание визарда со списком шагов</summary>
-		/// <param name="triggerMessage">Сообщение, с которого начинается визард</param>
-		/// <param name="instance">Источник создания элемента управления визардом</param>
-		/// <param name="steps">Список шагов, в которых начинается визард</param>
-		public WizardCtrl(String triggerMessage, Object instance, params StepRow[] steps)
-			: this(triggerMessage, instance)
+	/// <summary>Create a wizard with a list of steps</summary>
+	/// <param name="triggerMessage">Message that starts the wizard</param>
+	/// <param name="steps">List of steps with which the wizard starts</param>
+		public WizardCtrl(String triggerMessage, params StepRow[] steps)
+			: this(triggerMessage)
 			=> this.InitSteps(steps);
 
-		/// <summary>Создание визарда с указанием сообщение срабатывания и источник создания элемента</summary>
-		/// <param name="triggerMessage">Сообщение, с которого начинается визард</param>
-		/// <param name="instance">Источник создания элемента управления визардом</param>
-		protected WizardCtrl(String triggerMessage, Object instance)
+	/// <summary>Create a wizard specifying the trigger message and the source creating the element</summary>
+	/// <param name="triggerMessage">Message that starts the wizard</param>
+		protected WizardCtrl(String triggerMessage)
 		{
 			if(triggerMessage != null && triggerMessage.IndexOfAny(new Char[] { ',', '_', ' ' }) > -1)
-				throw new ArgumentException("Нельзя использовать в сообщении [',' '_' ' ']",nameof(triggerMessage));
+				throw new ArgumentException("Cannot use in message [',' '_' ' ']",nameof(triggerMessage));
 
 			this.TriggerMessage = triggerMessage;
-			this._instance = instance;
 		}
 
-		/// <summary>Инициализировать данные по шагам</summary>
+	/// <summary>Initialize data for the steps</summary>
 		protected void InitSteps(StepRow[] steps)
 		{
 			this._steps = steps;
@@ -111,9 +106,9 @@ namespace SAL.Interface.TelegramBot.UI
 			}
 		}
 
-		/// <summary>Запуск визарда</summary>
-		/// <param name="restart">Почистить все шаги перед стартом</param>
-		/// <returns>Первый шаг визарда</returns>
+	/// <summary>Start the wizard</summary>
+	/// <param name="restart">Clear all steps before start</param>
+	/// <returns>The first step of the wizard</returns>
 		public Reply Start(Boolean restart = false)
 		{
 			if(restart)
@@ -125,10 +120,10 @@ namespace SAL.Interface.TelegramBot.UI
 				: new Reply() { Title = nextStep.Title, Markup = new ForceReplyMarkup(), };
 		}
 
-		/// <summary>Обработка шага визарда</summary>
-		/// <param name="message">Сообщение</param>
-		/// <param name="isFinished">Визард завершился</param>
-		/// <returns>Следующий шаг визарда или null, если сообщение нераспознанно</returns>
+	/// <summary>Process a wizard step</summary>
+	/// <param name="message">Message</param>
+	/// <param name="isFinished">Wizard finished</param>
+	/// <returns>Next step of the wizard or null if the message is unrecognized</returns>
 		public Reply NextStep(Message message, out Boolean isFinished)
 		{
 			isFinished = false;
@@ -172,8 +167,8 @@ namespace SAL.Interface.TelegramBot.UI
 			return new Reply() { Title = nextStep.Title, ReplyToMessageId = message.MessageId, Markup = new ForceReplyMarkup(), };
 		}
 
-		/// <summary>Получить следующий шаг в визарде</summary>
-		/// <returns>Следующий шаг, либо null</returns>
+	/// <summary>Get the next step in the wizard</summary>
+	/// <returns>Next step or null</returns>
 		protected StepRow GetNextStep()
 		{
 			for(Int32 index = 0; index < this._steps.Length; index++)
@@ -196,8 +191,8 @@ namespace SAL.Interface.TelegramBot.UI
 				return false;
 		}
 
-		/// <summary>Почистить все значения заполненных хагов и вернуть их в качестве массива объектов</summary>
-		/// <returns>Массив заполненных объектов</returns>
+	/// <summary>Clear all values of filled steps and return them as an object array</summary>
+	/// <returns>Array of filled objects</returns>
 		public Object[] Clear()
 		{
 			List<Object> result = new List<Object>(this._steps.Length);

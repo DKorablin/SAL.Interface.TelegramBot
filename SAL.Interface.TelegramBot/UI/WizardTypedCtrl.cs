@@ -7,18 +7,18 @@ using SAL.Interface.TelegramBot.Response;
 
 namespace SAL.Interface.TelegramBot.UI
 {
-	/// <summary>Строготипизированная версия элемента управления визардом</summary>
-	/// <typeparam name="T">Тип объекта для получения из него шагов</typeparam>
-	/// <remarks>Из объекта берутся все публичные свойства, а описание каждого шага берётся из <see cref="DescriptionAttribute"/></remarks>
+	/// <summary>Strongly typed version of the wizard control</summary>
+	/// <typeparam name="T">Type of the object from which steps are obtained</typeparam>
+	/// <remarks>All public properties are taken from the object, and the description of each step is taken from <see cref="DescriptionAttribute"/></remarks>
 	public class WizardTypedCtrl<T> : WizardCtrl where T: class, new()
 	{
-		/// <summary>Типизированный шаг визарда</summary>
-		private class TypedStepRow : WizardCtrl.StepRow
+		/// <summary>Typed wizard step</summary>
+		private sealed class TypedStepRow : WizardCtrl.StepRow
 		{
 			private readonly PropertyInfo _property;
-			private Object[] _stepInstance;
+			private readonly Object[] _stepInstance;
 
-			/// <summary>Значение в инстансе</summary>
+			/// <summary>Value in the instance</summary>
 			public override Object Value
 			{
 				get => this._property.GetValue(this._stepInstance[0]);
@@ -41,26 +41,24 @@ namespace SAL.Interface.TelegramBot.UI
 					: attr.Description;
 			}
 
-			private static Object GetPropertyDefaultValue(PropertyInfo property){
+			private static Object GetPropertyDefaultValue(PropertyInfo property)
+			{
 				DefaultValueAttribute attr = property.GetCustomAttribute<DefaultValueAttribute>();
-				return attr == null
-				? null
-				: attr.Value;
+				return attr?.Value;
 			}
 		}
 
-		private T[] _stepInstanceReference;
-		private Func<Message, T, IEnumerable<Reply>> _callback;
+		private readonly T[] _stepInstanceReference;
+		private readonly Func<Message, T, IEnumerable<Reply>> _callback;
 
-		/// <summary>Создание экземпляра контролла визарда, с передачей всех необходимых аргументов</summary>
+		/// <summary>Create an instance of the wizard control, passing all necessary arguments</summary>
 		/// <param name="triggerMessage">
-		/// Стартовое сообщение с которого начинается визард.
-		/// Или null, если визард начинается вручную
+		/// Start message from which the wizard begins.
+		/// Or null if the wizard starts manually
 		/// </param>
-		/// <param name="instance">Источник визарда</param>
-		/// <param name="callback">Метод обратного вызова</param>
-		public WizardTypedCtrl(String triggerMessage, Object instance, Func<Message, T, IEnumerable<Reply>> callback)
-			: base(triggerMessage, instance)
+		/// <param name="callback">Callback method</param>
+		public WizardTypedCtrl(String triggerMessage, Func<Message, T, IEnumerable<Reply>> callback)
+			: base(triggerMessage)
 		{
 			this._stepInstanceReference = new T[] { new T(), };
 			this._callback = callback;
@@ -77,18 +75,18 @@ namespace SAL.Interface.TelegramBot.UI
 			base.InitSteps(stepInfo.ToArray());
 		}
 
-		/// <summary>Запустить визард, в качестве аргумента указывается (частично) заполненные шаги визарда</summary>
-		/// <param name="steps">Частично заполненный визард (К примеру, заполнено одно из свойств для будущей идентификации)</param>
-		/// <returns>Сообщение первого ответа</returns>
+		/// <summary>Start the wizard, passing (partially) filled wizard steps as an argument</summary>
+		/// <param name="steps">Partially filled wizard (e.g., one of the properties is filled for future identification)</param>
+		/// <returns>Message of the first response</returns>
 		public Reply Start(T steps)
 		{
 			this._stepInstanceReference[0] = steps;
 			return base.Start(false);
 		}
 
-		/// <summary>Обработат полученное сообщение</summary>
-		/// <param name="message">Сообщение от клиента</param>
-		/// <returns>Массив ответов следующего шага или null</returns>
+		/// <summary>Process the received message</summary>
+		/// <param name="message">Message from the client</param>
+		/// <returns>Array of replies of the next step or null</returns>
 		public IEnumerable<Reply> NextStep(Message message)
 		{
 			Reply result = base.NextStep(message, out Boolean isFinished);
