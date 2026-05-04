@@ -5,4 +5,3 @@ using System.Runtime.InteropServices;
 [assembly: System.CLSCompliant(false)]
 
 [assembly: AssemblyDescription("Base interfaces for Telegram SAL plugins")]
-[assembly: AssemblyCopyright("Copyright © Danila Korablin 2017-2025")]
